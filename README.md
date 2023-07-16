@@ -1,3 +1,17 @@
+## Learning NextAuth | Dave Gray 
+__Youtube: Next-Auth Login Authentication Tutorial with Next.js App Directory__  
+[https://www.youtube.com/watch?v=w2h54xz6Ndw](https://www.youtube.com/watch?v=w2h54xz6Ndw)
+<br />
+<hr />
+<hr />
+.  
+.  
+.  
+.  
+.  
+.  
+.  
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
