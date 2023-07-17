@@ -1,6 +1,11 @@
 ## Learning NextAuth | Dave Gray 
 __Youtube: Next-Auth Login Authentication Tutorial with Next.js App Directory__  
 [https://www.youtube.com/watch?v=w2h54xz6Ndw](https://www.youtube.com/watch?v=w2h54xz6Ndw)
+* Must use NEXTAUTH_SECRET env variable
+* Put it inside a .env.local file in the same level as the package.json file
+* Can use this command to generate NEXTAUTH_SECRET value: openssl rand -base64 32
+* But we can use any value, it doesn't need to be a generated secret value, can be any string
+* More details: [next-auth JWEDecryptionFailed](https://stackoverflow.com/a/76549310/4558910)
 <br />
 <hr />
 <hr />
