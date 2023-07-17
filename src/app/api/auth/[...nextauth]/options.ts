@@ -1,13 +1,13 @@
 import type { NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github"
+// import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const options: NextAuthOptions = {
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID as string,
-            clientSecret: process.env.GITHUB_SECRET as string
-        }),
+        // GithubProvider({
+        //     clientId: process.env.GITHUB_ID as string,
+        //     clientSecret: process.env.GITHUB_SECRET as string
+        // }),
         CredentialsProvider({
             name: "My Credentials Provider",
             credentials: {
@@ -26,15 +26,37 @@ export const options: NextAuthOptions = {
                 // here we have to make api calls
                 // to retrieve user data.
                 // the following is dummy data.
-                const user = { id: "42", name: "Shourov", password: "nextauth" };
+                const res = await fetch("http://localhost:3001/user")
+                const user = await res.json();
 
                 if( credentials?.username === user.name && credentials?.password === user.password ) {
                     return user
                 } else {
                     return null
                 }
-            }
+            },
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({token, user}) {
+            // console.log("Token:");
+            // console.log(token);
+            // console.log("User:");
+            // console.log(user);
+            
+            return {...token, ...user};
+        },
+        async session({ session, token, user }) {
+            // console.log("Session:");
+            // console.log(token);
+            // console.log("Token:");
+            // console.log(token);
+            // console.log("User:");
+            // console.log(user);
+
+            session.user = token as any;
+            return session;
+        }
+    }
     
 }

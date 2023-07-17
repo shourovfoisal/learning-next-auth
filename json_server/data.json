@@ -1,0 +1,19 @@
+{
+    "user": {
+        "name":"shourov",
+        "age": 29,
+        "address": "mirpur, dhaka",
+        "accessToken": "sampleJwtToken",
+        "password": "123"
+    },
+    "posts": [
+        {
+            "id": 1,
+            "title": "Hello"
+        },
+        {
+            "id": 2,
+            "title": "Boi"
+        }
+    ]
+}
