@@ -16,13 +16,17 @@ __Also mixed code taken from the youtube tutorial below (For using JWT tokens)__
 <br />
 <hr />
 <hr />
-.  
-.  
-.  
-.  
-.  
-.  
-.  
+
+__Using redux store from the server side__
+
+The current state of a redux store initiated inside the client environment is not accessible by a server component or function, like the authorize() function inside of the \[...nextauth\] function. In this project, the store is initiated inside of the root layout file, that begins with "use client". If tried using store.getState(), it will only show the initial state defined hardcoded in the slice.
+
+References:-  
+[How can I get redux state in a next 13 server component?](https://stackoverflow.com/a/76369709/4558910)
+[Access redux store inside Next.js API route](https://stackoverflow.com/q/70544228/4558910)  
+
+<hr />
+<hr />
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
