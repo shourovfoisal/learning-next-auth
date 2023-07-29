@@ -1,6 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 // import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials";
+import { store } from "@/redux/store";
+// import { savePosts } from "@/redux/slices/postsSlice";
 
 export const options: NextAuthOptions = {
     providers: [
@@ -26,8 +28,18 @@ export const options: NextAuthOptions = {
                 // here we have to make api calls
                 // to retrieve user data.
                 // the following is dummy data.
-                const res = await fetch("http://localhost:3001/user")
-                const user = await res.json();
+                const userRes = await fetch("http://localhost:3001/user")
+                const user = await userRes.json();
+
+                console.log("my store");
+                console.log(JSON.stringify(store.getState().postData.posts));
+
+                // const postRes = await fetch("http://localhost:3001/posts")
+                // await postRes.json().then((posts) => {
+                //     console.log("Dispatching post save action.");
+                //     store.dispatch(savePosts(posts));
+                // });
+
 
                 // console.log("fetchdata");
                 // console.log(JSON.stringify(user));

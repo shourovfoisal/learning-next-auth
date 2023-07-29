@@ -2,10 +2,13 @@
 import { signIn } from 'next-auth/react'
 import Router from 'next/router'
 import React, { useState } from 'react'
+import { store } from '@/redux/store'
+import { savePosts } from '@/redux/slices/postsSlice'
 
 type LoginData = {
   username: string,
-  password: string
+  password: string,
+  store: string
 }
 
 type Props = {}
@@ -15,6 +18,16 @@ const SignIn = (props: Props) => {
   const [loginData, setLoginData] = useState({} as LoginData);
 
   const handleLogin = async () => {
+
+    setLoginData(prevData => ({ ...prevData, store: "store" }))
+
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
+    store.dispatch(savePosts([{ id: 3, title: "three" }]));
     signIn("credentials", { ...loginData, redirect: false })
     // .then(
     //   (loginInfo: any) => {

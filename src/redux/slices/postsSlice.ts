@@ -7,10 +7,17 @@ type Post = {
 
 const postsSlice = createSlice({
     name: "posts",
-    initialState: [] as Post[],
+    initialState: {
+        posts: [] as Post[],
+    },
     reducers: {
         savePosts: (state, action) => {
-            state.push(action.payload)
+            console.log("Inside post save action");
+            console.log("action payload is: ");
+            console.log(action.payload);
+            state.posts = action.payload;
+            console.log("state is: ");
+            console.log(state.posts);
         }
     }
 });
