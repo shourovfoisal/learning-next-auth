@@ -29,9 +29,20 @@ export const options: NextAuthOptions = {
                 const res = await fetch("http://localhost:3001/user")
                 const user = await res.json();
 
-                if( credentials?.username === user.name && credentials?.password === user.password ) {
+                // console.log("fetchdata");
+                // console.log(JSON.stringify(user));
+                // console.log("credentials");
+                // console.log(JSON.stringify(credentials));
+
+                // console.log(`credential.u = ${credentials?.username} fetch.u = ${user?.username}`);
+                // console.log(`username match: ${credentials?.username === user?.username}`);
+                // console.log(`password match: ${credentials?.password === user?.password}`);
+
+                if( credentials?.username === user?.name && credentials?.password === user?.password ) {
+                    console.log("login success");
                     return user
                 } else {
+                    console.log("login failure");
                     return null
                 }
             },
@@ -57,6 +68,8 @@ export const options: NextAuthOptions = {
             session.user = token as any;
             return session;
         }
+    },
+    pages: {
+        signIn: "/signin"
     }
-    
 }
