@@ -10,9 +10,13 @@ __Also mixed code taken from the youtube tutorial below (For using JWT tokens)__
 * Can use this command to generate NEXTAUTH_SECRET value: openssl rand -base64 32
 * But we can use any value, it doesn't need to be a generated secret value, can be any string
 * More details: [next-auth JWEDecryptionFailed](https://stackoverflow.com/a/76549310/4558910)
-* ----
+ ---
 * To use JSON Server
-* json-server --watch json_server/data.json --port 3001 --middlewares json_server/middleware.js
+* json-server --watch json_server/data.json --port 3001 --middlewares json_server/middleware.js  
+ ---
+* Two factor authorization can be implemented using two credential providers
+* Follow the official doc: [Credentials - Multiple providers](https://next-auth.js.org/providers/credentials#multiple-providers)
+* And also see the [SignIn Callback](https://next-auth.js.org/configuration/callbacks#sign-in-callback)
 <br />
 <hr />
 <hr />
