@@ -10,6 +10,7 @@ export default function Navbar() {
                 <li><Link href="/server">Server</Link></li>
                 <li><Link href="/client">Client</Link></li>
                 <li><Link href="/extra">Extra</Link></li>
+                <li><Link href="/twofactor">Two Factor</Link></li>
             </ul>
         </nav>
     )

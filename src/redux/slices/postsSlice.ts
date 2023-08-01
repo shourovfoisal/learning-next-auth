@@ -12,12 +12,7 @@ const postsSlice = createSlice({
     },
     reducers: {
         savePosts: (state, action) => {
-            console.log("Inside post save action");
-            console.log("action payload is: ");
-            console.log(action.payload);
             state.posts = action.payload;
-            console.log("state is: ");
-            console.log(state.posts);
         }
     }
 });

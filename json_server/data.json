@@ -4,7 +4,12 @@
         "age": 29,
         "address": "mirpur, dhaka",
         "accessToken": "sampleJwtToken",
-        "password": "123"
+        "password": "123",
+        "status": "OTP_REQUIRED"
+    },
+    "twoFactor": {
+        "user": "shourov",
+        "value": "abcd"
     },
     "posts": [
         {

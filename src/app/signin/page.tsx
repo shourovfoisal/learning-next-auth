@@ -20,15 +20,7 @@ const SignIn = (props: Props) => {
   const handleLogin = async () => {
 
     setLoginData(prevData => ({ ...prevData, store: "store" }))
-
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    store.dispatch(savePosts([{ id: 3, title: "three" }]));
-    signIn("credentials", { ...loginData, redirect: false })
+    signIn("userpass", { ...loginData })
     // .then(
     //   (loginInfo: any) => {
     //       console.log(loginInfo);

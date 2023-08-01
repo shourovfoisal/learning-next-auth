@@ -11,6 +11,7 @@ export const options: NextAuthOptions = {
         //     clientSecret: process.env.GITHUB_SECRET as string
         // }),
         CredentialsProvider({
+            id: "userpass",
             name: "My Credentials Provider",
             credentials: {
                 username: {
@@ -24,15 +25,9 @@ export const options: NextAuthOptions = {
                     placeholder: "Input your password"
                 }
             },
-            async authorize(credentials) {
-                // here we have to make api calls
-                // to retrieve user data.
-                // the following is dummy data.
+            async authorize(credentials, request) {
                 const userRes = await fetch("http://localhost:3001/user")
                 const user = await userRes.json();
-
-                console.log("my store");
-                console.log(JSON.stringify(store.getState().postData.posts));
 
                 // const postRes = await fetch("http://localhost:3001/posts")
                 // await postRes.json().then((posts) => {
@@ -52,9 +47,51 @@ export const options: NextAuthOptions = {
 
                 if( credentials?.username === user?.name && credentials?.password === user?.password ) {
                     console.log("login success");
-                    return user
+                    return user;
                 } else {
                     console.log("login failure");
+                    return null
+                }
+            },
+        }),
+        CredentialsProvider({
+            id: "twofactor",
+            name: "Two Factor",
+            credentials: {
+                username: {
+                    label: "Username:",
+                    type: "text",
+                    placeholder: "Input your username"
+                },
+                verificationCode: {
+                    label: "Verification Code:",
+                    type: "text",
+                    placeholder: "Input your verification code"
+                }
+            },
+            async authorize(credentials) {
+
+                const dummyUserSuccessData = {
+                    id: "1",
+                    name:"shourov",
+                    age: 29,
+                    address: "mirpur, dhaka",
+                    accessToken: "sampleJwtToken",
+                    password: "123",
+                    status: "LOGGED_IN"
+                }
+
+                const twoFactorRes = await fetch("http://localhost:3001/twoFactor")
+                const twoFactor = await twoFactorRes.json();
+
+                if( 
+                    credentials?.username === twoFactor?.user && 
+                    credentials?.verificationCode === twoFactor?.value 
+                ) {
+                    console.log("two factor success");
+                    return dummyUserSuccessData
+                } else {
+                    console.log("two factor failure");
                     return null
                 }
             },
@@ -79,6 +116,13 @@ export const options: NextAuthOptions = {
 
             session.user = token as any;
             return session;
+        },
+        async signIn({user, account, profile, email, credentials}: any){
+            if(user.status === 'OTP_REQUIRED') {
+                return `/twofactor?name=${user.name}`
+            } else {
+                return true
+            }
         }
     },
     pages: {

@@ -26,7 +26,6 @@ export default function RootLayout({
       async function getPosts () {
           const postRes = await fetch("http://localhost:3001/posts")
           await postRes.json().then((posts) => {
-              console.log("Dispatching post save action.");
               store.dispatch(savePosts(posts));
           });
       }
