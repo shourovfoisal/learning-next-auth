@@ -26,24 +26,8 @@ export const options: NextAuthOptions = {
                 }
             },
             async authorize(credentials, request) {
-                const userRes = await fetch("http://localhost:3001/user")
+                const userRes = await fetch("http://localhost:3001/user/1")
                 const user = await userRes.json();
-
-                // const postRes = await fetch("http://localhost:3001/posts")
-                // await postRes.json().then((posts) => {
-                //     console.log("Dispatching post save action.");
-                //     store.dispatch(savePosts(posts));
-                // });
-
-
-                // console.log("fetchdata");
-                // console.log(JSON.stringify(user));
-                // console.log("credentials");
-                // console.log(JSON.stringify(credentials));
-
-                // console.log(`credential.u = ${credentials?.username} fetch.u = ${user?.username}`);
-                // console.log(`username match: ${credentials?.username === user?.username}`);
-                // console.log(`password match: ${credentials?.password === user?.password}`);
 
                 if( credentials?.username === user?.name && credentials?.password === user?.password ) {
                     console.log("login success");
@@ -71,15 +55,12 @@ export const options: NextAuthOptions = {
             },
             async authorize(credentials) {
 
-                const dummyUserSuccessData = {
-                    id: "1",
-                    name:"shourov",
-                    age: 29,
-                    address: "mirpur, dhaka",
-                    accessToken: "sampleJwtToken",
-                    password: "123",
-                    status: "LOGGED_IN"
-                }
+                /**
+                 * here I am not fetching the second user
+                 * simply because I don't know how to change
+                 */
+                const userRes = await fetch("http://localhost:3001/user/1")
+                const user = await userRes.json();
 
                 const twoFactorRes = await fetch("http://localhost:3001/twoFactor")
                 const twoFactor = await twoFactorRes.json();
@@ -89,7 +70,10 @@ export const options: NextAuthOptions = {
                     credentials?.verificationCode === twoFactor?.value 
                 ) {
                     console.log("two factor success");
-                    return dummyUserSuccessData
+                    // here I am manually changing this status
+                    // but in actual scenerio, the server will handle it
+                    user.status = "SIGNED_IN";  
+                    return user
                 } else {
                     console.log("two factor failure");
                     return null
@@ -117,13 +101,13 @@ export const options: NextAuthOptions = {
             session.user = token as any;
             return session;
         },
-        async signIn({user, account, profile, email, credentials}: any){
-            if(user.status === 'OTP_REQUIRED') {
-                return `/twofactor?name=${user.name}`
-            } else {
-                return true
-            }
-        }
+        // async signIn({user, account, profile, email, credentials}: any){
+        //     if(user.status === 'OTP_REQUIRED') {
+        //         return `/twofactor?name=${user.name}`
+        //     } else {
+        //         return true
+        //     }
+        // }
     },
     pages: {
         signIn: "/signin"

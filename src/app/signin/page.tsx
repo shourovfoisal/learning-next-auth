@@ -1,32 +1,34 @@
 "use client"
 import { signIn } from 'next-auth/react'
-import Router from 'next/router'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { store } from '@/redux/store'
-import { savePosts } from '@/redux/slices/postsSlice'
 
 type LoginData = {
   username: string,
-  password: string,
-  store: string
+  password: string
 }
 
 type Props = {}
 
 const SignIn = (props: Props) => {
 
+  const router = useRouter();
+
   const [loginData, setLoginData] = useState({} as LoginData);
 
   const handleLogin = async () => {
 
-    setLoginData(prevData => ({ ...prevData, store: "store" }))
-    signIn("userpass", { ...loginData })
-    // .then(
-    //   (loginInfo: any) => {
-    //       console.log(loginInfo);
-    //       !loginInfo.error ? Router.push("/extra") : null
-    //   }
-    // );
+    signIn("userpass", {
+      ...loginData, 
+      redirect: false 
+    }).then((res) => {
+      console.log("Login res is: ");
+      console.log(res);
+      if(!res?.error) {
+        console.log("Login was successful");
+        router.push("/");
+      }
+    });
   }
 
   return (
